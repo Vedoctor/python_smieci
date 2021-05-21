@@ -12,21 +12,23 @@ def generate_map_array(img_name):
 
     im = Image.open(img_name).convert('RGB')  # wczytanie obrazka i konwersja na kolorki RGB
 
-    size = im.size[0]  # sprawdzenie rozmiaru
+    width, height = im.size  # sprawdzenie rozmiaru
 
     map_array = []  # init tablicy ktora bedzie zapisywac mape
-
-    for row in range(size):  # for - dla kazdego rzedu pixeli na obrazku
+    for row in range(height):  # for - dla kazdego rzedu pixeli na obrazku
         row_array = []  # wyzerowanie tablicy przechowujacej tymczasowo jeden rzad
-        for pixel in range(size):  # for - dla kazdego pixela w rzedzie
-            if im.getpixel((pixel, row)) < (127, 127, 127):  # jesli kolor pixela o adresie (pixel, row) jest
-                # mniejszy niz 127, 127, 127 (czyli pixel jest ciemny)
+        for pixel in range(width):  # for - dla kazdego pixela w rzedzie
+            color = im.getpixel((pixel, row))  # kolor pixela o adresie (pixel, row)
+            if color < (20, 20, 20):  # jesli kolor pixela jest mniejszy niz 20, 20, 20 (czyli pixel jest ciemny)
                 row_array.append(1)  # to zapisz do tymczasowej tablicy jeden
-            else:  # jesli jest wiekszy niz 127 (czyli pixel jasny)
+            if color[0] > 200 and color[1, 2] < (20, 20):  # jesli kolor pixela R jest wiekszy niz 200 i jednoczesnie
+                # G i B sa mniejsze od 20 (czyli bardzo czerwony)
+                row_array.append(2)  # to zapisz do tymczasowej tablicy dwa
+            else:  # w kazdym innym przypadku (czyli pixel jasny)
                 row_array.append(0)  # zapisz zero
         map_array.append(row_array)  # zapisz tymczasowa tablice to tej glownej, koncowej
 
-    return map_array
+    return map_array  # zwroc gotowa tablice
 
 
 # ponizej tylko wypisywanie, mozesz pominac ofc
