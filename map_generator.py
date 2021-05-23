@@ -32,7 +32,7 @@ def generate_map_array(img_name):
 
 
 # ponizej tylko wypisywanie, mozesz pominac ofc
-for row in generate_map_array('map2.jpg'):
+for row in generate_map_array('example_img.jpg'):
     print(row)
 
 # mam nadzieje ze wszystko zrozumiale
